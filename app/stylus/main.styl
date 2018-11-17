@@ -1,0 +1,67 @@
+@import 'helpers/_mixins.styl'
+@import 'helpers/_settings.styl'
+@import '../block/**/*.styl'
+
+body
+	margin 0
+	padding 0
+
+.h1 
+	font-family "Montserrat", sans-serif
+	font-size 40px
+	text-align left
+	color #fff
+	font-weight 600
+	margin 0
+	
+.h2
+	font-family "Montserrat", sans-serif
+	font-size 40px
+	color #000
+	font-weight 600
+	
+.p
+	color #fff
+	font-size 16px
+	font-family "Roboto"
+	line-height 1.5
+	margin-bottom 0
+
+a 
+	cursor pointer
+	
+.button
+	background-color bottonColor
+	border-radius 4px
+	height 56px
+	width 154px
+	line-height 56px
+	border none
+	transition all 0.3s ease
+	display block
+	font-family "Montserrat", sans-serif
+	font-weight 500
+	font-size 16px
+	color #fff
+	text-decoration none
+	text-align center
+	&:hover
+		background-color bottonColorHover
+
+.container
+	width: 1130px
+	padding 0 15px
+	
+@media only screen and (max-width : 480px)
+	.h1
+		font-size 32px
+	.h2
+		font-size 32px
+
+@media only screen and (min-width : 843px)	
+	.hidden-lg
+		display none
+		
+@media only screen and (max-width : 843px)	
+	.hidden-sm
+		display none

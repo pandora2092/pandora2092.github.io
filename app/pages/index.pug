@@ -1,0 +1,15 @@
+extends layout/main.pug
+
+include ../block/header/header.pug
+include ../block/footer/footer.pug
+include ../block/table/table.pug
+
+block title
+	title Тестовое задание Selectel
+
+block pagecontent
+	+header()
+
+	+table()
+	
+	+footer()

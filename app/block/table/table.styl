@@ -1,0 +1,50 @@
+.table
+	display flex
+	justify-content center
+	padding: 120px 0
+	&__content
+		display flex
+		border 2px solid rgba(0, 0, 0, 0.8)
+		border-radius 8px
+		padding 24px
+		margin-bottom 24px
+		flex-wrap wrap
+		&:last-child
+				margin-bottom 0
+	&__h2
+		text-align center
+		margin 0 0 48px 0
+	&__title-slot
+		font-size 16px
+		color rgba(000,000,000, .8)
+	&__titles
+		display flex
+		padding 0 24px 15px 24px
+	&__title
+		flex 1 1 15%
+		align-self center
+		padding 0 15px
+		font-size 16px
+		color rgba(000,000,000, .8)
+	&__slot 
+		flex 1 1 15%
+		align-self center
+		padding 0 15px
+		font-size 18px
+			
+@media only screen and (max-width : 842px)
+	.table
+		&__slot 
+			flex 1 1 100%
+			margin-bottom 15px
+			padding 0
+			&:last-child
+				margin-bottom 0
+
+@media only screen and (max-width : 768px)
+	.table
+		padding 80px 0
+		&__content
+			div 
+				flex 1 1 100%
+				

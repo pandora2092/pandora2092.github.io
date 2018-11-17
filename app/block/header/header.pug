@@ -1,0 +1,42 @@
+mixin header()
+	header.header
+		.header__sliders
+			.header__logo
+				.header__content.container
+					a(href="https://selectel.ru/" target="_blanck")
+						img(src="assets/img/selectel.svg", alt="")
+					.header__wrap-phone
+						a(href="tel:+7(800)555-06-75")
+							img.header__icon-phone(src="assets/img/phone-icon.svg", alt="")
+							span.header__phone +7 (800) 555-06-75
+			.header__slide.header__slide_blue
+				.header__content
+					h1.h1.header__h1 Надежное, безопасное, удобное хранилище ваших данных
+					p.p.header__p  Подходит для веб-приложений, хранения архивов, резервного копирования и раздачи статического контента.
+					a.button.header__button(href="https://selectel.ru/" target="_blank") Заказать
+			.header__slide.header__slide_sea
+				.header__content
+					h1.h1.header__h1 Надежные серверы для проектов любой сложности
+					p.p.header__p  Выделенный сервер — это аренда сервера под задачи вашего проекта с возможностью свободно распоряжаться ресурсами машины и установки любого программного обеспечения.
+					a.button.header__button(href="https://selectel.ru/" target="_blank") Заказать
+			.header__slide.header__slide_green
+				.header__content
+					h1.h1.header__h1 Публичное облако на базе технологий VMware с оплатой по потреблению
+					p.p.header__p  Публичное облако на базе VMware позволяет быстро нарастить мощности вашего дата-центра без капитальных и организационных затрат с оплатой за потребляемые ресурсы.
+					a.button.header__button(href="https://selectel.ru/" target="_blank") Заказать
+			.header__slide.header__slide_violet
+				.header__content
+					h1.h1.header__h1 Размещение серверного оборудования в дата‑центрах уровня надежности Tier III
+					p.p.header__p Размещение серверного оборудования (колокейшн) в современном дата-центре с уровнем надежности Tier III с гарантированным каналом связи с высокой пропускной способностью, бесперебойным питанием и необходимым охлаждением.
+					a.button.header__button(href="https://selectel.ru/" target="_blank") Заказать
+			.header__sliderArrow.hidden-lg
+				a.prev(onclick="clickPrevSlide()")
+					img(src="assets/img/prev.svg", alt="")
+				a.next(onclick="clickNextSlide()")
+					img(src="assets/img/next.svg", alt="")
+			.header__slideNav.hidden-sm
+				.header__slideDots
+					.header__dot(onclick="clickSlide(0)")
+					.header__dot(onclick="clickSlide(1)")
+					.header__dot(onclick="clickSlide(2)")
+					.header__dot(onclick="clickSlide(3)")

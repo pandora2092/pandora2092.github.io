@@ -1,0 +1,98 @@
+.header
+	&__content
+		width 1130px
+		align-self center
+		padding 15px
+		a 
+			color #fff
+			font-family "Roboto", sans-serif
+			font-size 20px
+			text-decoration none
+	&__wrap-phone
+		float right
+		opacity 1
+		transition all 0.3s ease
+		&:hover
+			opacity .6
+	&__icon-phone
+		position relative
+		top 2px 
+		right 11px
+	&__logo
+		z-index 100
+		position relative
+		display flex
+		justify-content center
+		padding-top 40px
+		img 
+			opacity 1
+			transition all 0.3s ease
+			&:hover
+				opacity .6
+	&__button
+		margin-top 40px
+	&__sliders
+		position relative
+		min-height 600px
+		margin 0
+		padding 0
+	&__slide
+		height 600px
+		position absolute
+		left 0
+		top 0
+		width 100%
+		opacity 0
+		z-index 1
+		transition opacity .6s ease
+		display flex
+		justify-content center
+		&:first-child
+			opacity 1
+	&__slide_blue
+		background: linear-gradient(to top, #2F4966 , #34557C)
+	&__slide_sea
+		background: linear-gradient(to top, #2F3F66 , #314579)
+	&__slide_green
+		background: linear-gradient(to top, #2F6066 , #327179)
+	&__slide_violet
+		background: linear-gradient(to top, #4E2F66 , #603285)
+	&__dot
+		cursor pointer
+		height 8px
+		width 8px
+		border-radius 50%
+		background transparent
+		border 1px solid #fff
+		opacity .6
+		display inline-block
+		transition opacity 0.6s ease
+		margin-right 8px 
+		&:hover
+			opacity 1
+	&__slideDots
+		position relative
+		bottom 20px
+		text-align center
+		z-index 100
+		top 490px
+	&__sliderArrow
+		position relative
+		z-index 100
+		top 478px
+	&__h1
+		max-width 760px
+	&__p
+		max-width 570px
+		margin-top 40px
+.active 
+	background-color #fff
+	&:hover
+		opacity 1
+	
+@media only screen and (max-width : 480px)
+	.header
+		&__p
+			display none
+		&__phone
+			display none
