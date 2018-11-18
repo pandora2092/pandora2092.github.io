@@ -3,11 +3,6 @@
 		width 1130px
 		align-self center
 		padding 15px
-		a 
-			color #fff
-			font-family "Roboto", sans-serif
-			font-size 20px
-			text-decoration none
 	&__wrap-phone
 		float right
 		opacity 1
@@ -24,11 +19,6 @@
 		display flex
 		justify-content center
 		padding-top 40px
-		img 
-			opacity 1
-			transition all 0.3s ease
-			&:hover
-				opacity .6
 	&__button
 		margin-top 40px
 	&__sliders
@@ -85,10 +75,24 @@
 	&__p
 		max-width 570px
 		margin-top 40px
+		
 .active 
 	background-color #fff
 	&:hover
 		opacity 1
+		
+.logo
+	&__img
+		opacity 1
+		transition all 0.3s ease
+		&:hover
+			opacity .6
+
+.link-phone
+	color #fff
+	font-family "Roboto", sans-serif
+	font-size 20px
+	text-decoration none
 	
 @media only screen and (max-width : 480px)
 	.header

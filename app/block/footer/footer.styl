@@ -2,37 +2,36 @@
 	background-color footerColor
 	min-height 104px
 	display flex
-	justify-content center	
-	img 
-		height 24px
+	justify-content center
 	&__container
 		display flex
 		flex-wrap wrap
-		ul 
-			list-style-type none
-			margin 0
-			padding 0
-			li
-				display inline-block
-				margin-right 15px
+	&__ul
+		list-style-type none
+		margin 0
+		padding 0
+	&_li
+		display inline-block
+		margin-right 15px
+		&:last-child
+			margin-right 0
 	&__logo
 		flex 1 1 50%
 		align-self center
-		img 
-			opacity 1
-			transition all 0.3s ease
-			&:hover
-				opacity .6
 	&__social-block
 		flex 1 1 50%
 		align-self center
 		text-align right
-		img 
-			opacity 1
-			transition all 0.3s ease
-			&:hover
-				opacity .6
-		
+
+				
+.hover
+	&__img
+		opacity 1
+		transition all 0.3s ease
+		height 24px
+		&:hover
+			opacity .6
+			
 @media only screen and (max-width : 768px)
 	.footer
 		&__social-block
