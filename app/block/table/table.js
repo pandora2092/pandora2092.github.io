@@ -33,7 +33,7 @@ xhr.onload = function() {
     tableContent.innerHTML += '<div class="table__slot"><div class="hidden-lg table__title-slot">Жесткий диск</div>'+hdd+' '+'ГБ'+'</div>';
     tableContent.innerHTML += '<div class="table__slot"><div class="hidden-lg table__title-slot">Память</div>'+ram+' '+'ГБ'+'</div>';
     tableContent.innerHTML += '<div class="table__slot"><div class="hidden-lg table__title-slot">Цена</div>'+price+' '+'₽/мес.'+'</div>';
-    tableContent.innerHTML += '<div class="table__slot"><a class="button" target="_blanck" href="https://selectel.ru/">Заказать</a></button></div>';
+    tableContent.innerHTML += '<div class="table__slot"><a class="button" target="_blank" href="https://selectel.ru/">Заказать</a></button></div>';
     tableContainer.appendChild(tableContent);
   }
 }
