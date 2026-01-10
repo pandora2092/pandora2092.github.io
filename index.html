@@ -51,10 +51,9 @@
       skin: tg.colorScheme === 'dark' ? 'oxide-dark' : 'oxide',
       content_css: tg.colorScheme === 'dark' ? 'dark' : 'default',
       mobile: {
-        theme: 'mobile', // специальная тема для мобильного интерфейса
-        toolbar: ['undo', 'bold', 'italic', 'underline', 'link'], // упрощённый тулбар
-        plugins: ['lists', 'link'], // мобильные плагины
-        menubar: false // скрыть меню на мобиле
+        menubar: true,
+        plugins: 'autosave lists autolink',
+        toolbar: 'undo bold italic styles'
       },
       setup: (editor) => {
         editor.on('init', () => {
