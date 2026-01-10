@@ -50,6 +50,12 @@
       toolbar: 'bold italic underline | bullist numlist | link | undo redo',
       skin: tg.colorScheme === 'dark' ? 'oxide-dark' : 'oxide',
       content_css: tg.colorScheme === 'dark' ? 'dark' : 'default',
+      mobile: {
+        theme: 'mobile', // специальная тема для мобильного интерфейса
+        toolbar: ['undo', 'bold', 'italic', 'underline', 'link'], // упрощённый тулбар
+        plugins: ['lists', 'link'], // мобильные плагины
+        menubar: false // скрыть меню на мобиле
+      },
       setup: (editor) => {
         editor.on('init', () => {
           loadText(editor);
