@@ -58,11 +58,11 @@
     });
 
     // Загрузка текста
-    //https://n8n.srv1168226.hstgr.cloud/webhook-test/get-text?textId=recW0W5t7N2CQefqL
-    //https://n8n.srv1168226.hstgr.cloud/webhook-test/get-text?textId=${textId}
+    //https://n8n.srv1168226.hstgr.cloud/webhook/get-text?textId=recW0W5t7N2CQefqL
+    //https://n8n.srv1168226.hstgr.cloud/webhook/get-text?textId=${textId}
 
     function loadText(editor) {
-      fetch(`https://n8n.srv1168226.hstgr.cloud/webhook-test/get-text?textId=recW0W5t7N2CQefqL`)
+      fetch(`https://n8n.srv1168226.hstgr.cloud/webhook/get-text?textId=recW0W5t7N2CQefqL`)
         .then(res => res.json())
         .then(data => {
           editor.setContent(data.text || '');
