@@ -65,7 +65,7 @@
       fetch(`https://n8n.srv1168226.hstgr.cloud/webhook/get-text?textId=recW0W5t7N2CQefqL`)
         .then(res => res.json())
         .then(data => {
-          editor.setContent(data.text || '');
+          editor.setContent(`<pre>${data.text}</pre>` || '');
         })
         .catch(() => {
           editor.setContent('<p>Ошибка загрузки текста</p>');
