@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Редактор текста</title>
+
+  <!-- Telegram Web App SDK -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <!-- TinyMCE (бесплатно, без ключа) -->
+  <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 12px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont;
+      background: var(--tg-theme-bg-color);
+      color: var(--tg-theme-text-color);
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TinyMCE цепляется к textarea -->
+  <textarea id="editor"></textarea>
+  <button id="saveBtn">💾 Сохранить</button>
+
+  <script>
+    const tg = Telegram.WebApp;
+    tg.expand();
+
+    const params = new URLSearchParams(window.location.search);
+    const textId = params.get('textId');
+
+    // Инициализация TinyMCE
+    tinymce.init({
+      selector: '#editor',
+      height: '80vh',
+      menubar: false,
+      plugins: 'lists link',
+      toolbar: 'bold italic underline | bullist numlist | link | undo redo',
+      skin: tg.colorScheme === 'dark' ? 'oxide-dark' : 'oxide',
+      content_css: tg.colorScheme === 'dark' ? 'dark' : 'default',
+      setup: (editor) => {
+        editor.on('init', () => {
+          loadText(editor);
+        });
+      }
+    });
+
+    // Загрузка текста
+    function loadText(editor) {
+      fetch(`https://n8n.your-domain/webhook/get-text?textId=${textId}`)
+        .then(res => res.json())
+        .then(data => {
+          editor.setContent(data.text || '');
+        })
+        .catch(() => {
+          editor.setContent('<p>Ошибка загрузки текста</p>');
+        });
+    }
+
+    // Сохранение
+    document.getElementById('saveBtn').onclick = () => {
+      const content = tinymce.get('editor').getContent();
+
+      tg.sendData(JSON.stringify({
+        textId: textId,
+        text: content
+      }));
+    };
+  </script>
+
+</body>
+</html>
