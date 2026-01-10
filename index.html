@@ -138,10 +138,15 @@
     // Сохранение
     document.getElementById('saveBtn').onclick = () => {
       const content = quill.getText(); // plain text, без html
-      tg.sendData(JSON.stringify({
-        textId: textId,
-        text: content
-      }));
+
+      fetch(`https://n8n.srv1168226.hstgr.cloud/webhook/save-text`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ textId, text: content })
+      });
+
+      tg.sendData(JSON.stringify({ textId }));
+      tg.close();
     };
   </script>
 
