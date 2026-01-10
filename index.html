@@ -21,25 +21,72 @@
     }
 
     #editor-container {
-      height: 80vh;
+      height: 75vh;
+      font-size: 18px;
       background: #fff;
       border-radius: 8px;
       overflow-y: auto;
+      margin-bottom: 10px;
     }
 
     button {
       width: 100%;
-      padding: 14px;
-      margin-top: 10px;
-      font-size: 16px;
+      padding: 16px;
+      font-size: 18px;
       border-radius: 8px;
     }
 
-    /* Для dark-mode Telegram */
-    body.dark #editor-container .ql-toolbar,
-    body.dark #editor-container .ql-container {
-      background-color: #1e1e1e;
+    /* Toolbar кнопки крупнее для touch */
+    .ql-toolbar button {
+      padding: 12px;
+      min-width: 40px;
+      font-size: 16px;
+    }
+
+    .ql-toolbar .ql-picker-label,
+    .ql-toolbar .ql-picker-item {
+      padding: 8px 12px;
+      font-size: 16px;
+    }
+
+    /* Scrollable toolbar на мобильных */
+    .ql-toolbar {
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    /* pre для JSON или кода */
+    .ql-editor pre {
+      background: #f5f5f5;
+      padding: 10px;
+      border-radius: 6px;
+      white-space: pre-wrap;
+      font-family: monospace;
+    }
+
+    /* Dark mode */
+    body.dark #editor-container {
+      background: #1e1e1e;
       color: #ffffff;
+    }
+    body.dark .ql-editor pre {
+      background: #2a2a2a;
+      color: #f5f5f5;
+    }
+    body.dark .ql-toolbar, body.dark .ql-toolbar button, body.dark .ql-picker-label {
+      background: #1e1e1e;
+      color: #ffffff;
+    }
+
+    /* Дополнительно увеличиваем текст на узких экранах */
+    @media (max-width: 768px) {
+      #editor-container {
+        font-size: 20px;
+      }
+      .ql-toolbar button {
+        padding: 14px;
+        font-size: 18px;
+      }
     }
   </style>
 </head>
