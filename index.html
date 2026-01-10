@@ -7,8 +7,9 @@
   <!-- Telegram Web App SDK -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-  <!-- TinyMCE (бесплатно, без ключа) -->
-<script src="https://cdn.tiny.cloud/1/3c98efva8mbn910j6kwwgbv1eeagixkji0gse3tkqn0h8jcs/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
+  <!-- Quill (бесплатно, MIT) -->
+  <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
+  <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
 
   <style>
     body {
@@ -19,6 +20,13 @@
       color: var(--tg-theme-text-color);
     }
 
+    #editor-container {
+      height: 80vh;
+      background: #fff;
+      border-radius: 8px;
+      overflow-y: auto;
+    }
+
     button {
       width: 100%;
       padding: 14px;
@@ -26,61 +34,63 @@
       font-size: 16px;
       border-radius: 8px;
     }
+
+    /* Для dark-mode Telegram */
+    body.dark #editor-container .ql-toolbar,
+    body.dark #editor-container .ql-container {
+      background-color: #1e1e1e;
+      color: #ffffff;
+    }
   </style>
 </head>
 <body>
 
-  <!-- TinyMCE цепляется к textarea -->
-  <textarea id="editor"></textarea>
+  <!-- Контейнер для Quill -->
+  <div id="editor-container"></div>
   <button id="saveBtn">💾 Сохранить</button>
 
   <script>
     const tg = Telegram.WebApp;
     tg.expand();
 
+    // Установка dark-mode
+    if(tg.colorScheme === 'dark') {
+      document.body.classList.add('dark');
+    }
+
     const params = new URLSearchParams(window.location.search);
     const textId = params.get('textId');
 
-    // Инициализация TinyMCE
-     tinymce.init({
-      selector: '#editor',
-      height: '80vh',
-      menubar: false,
-      plugins: 'lists link',
-      toolbar: 'bold italic underline | bullist numlist | link | undo redo',
-      skin: tg.colorScheme === 'dark' ? 'oxide-dark' : 'oxide',
-      content_css: tg.colorScheme === 'dark' ? 'dark' : 'default',
-      mobile: {
-        menubar: true,
-        plugins: 'autosave lists autolink',
-        toolbar: 'undo bold italic styles'
+    // Инициализация Quill
+    const quill = new Quill('#editor-container', {
+      theme: 'snow', // минимальная, адаптивная тема
+      modules: {
+        toolbar: [
+          ['bold', 'italic', 'underline'],
+          [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+          ['link', 'clean'],
+        ]
       },
-      setup: (editor) => {
-        editor.on('init', () => {
-          loadText(editor);
-        });
-      }
+      placeholder: 'Введите текст...'
     });
 
     // Загрузка текста
-    //https://n8n.srv1168226.hstgr.cloud/webhook/get-text?textId=recW0W5t7N2CQefqL
-    //https://n8n.srv1168226.hstgr.cloud/webhook/get-text?textId=${textId}
-
-    function loadText(editor) {
-      fetch(`https://n8n.srv1168226.hstgr.cloud/webhook/get-text?textId=recW0W5t7N2CQefqL`)
+    function loadText() {
+      fetch(`https://n8n.srv1168226.hstgr.cloud/webhook/get-text?textId=${textId || 'recW0W5t7N2CQefqL'}`)
         .then(res => res.json())
         .then(data => {
-          editor.setContent(`<pre>${data.text}</pre>` || '');
+          // Вставляем как pre (для JSON) или обычный текст
+          quill.setText(data.text || '');
         })
         .catch(() => {
-          editor.setContent('<p>Ошибка загрузки текста</p>');
+          quill.setText('Ошибка загрузки текста');
         });
     }
+    loadText();
 
     // Сохранение
     document.getElementById('saveBtn').onclick = () => {
-      const content = tinymce.get('editor').getContent();
-
+      const content = quill.getText(); // plain text, без html
       tg.sendData(JSON.stringify({
         textId: textId,
         text: content
