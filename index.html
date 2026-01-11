@@ -95,6 +95,10 @@
   <!-- Контейнер для Quill -->
   <div id="editor-container"></div>
   <button id="saveBtn">💾 Сохранить</button>
+  <div id="log" style="white-space:pre-wrap;font-size:12px"></div>
+
+  <div id="log2" style="white-space:pre-wrap;font-size:12px"></div>
+
 
   <script>
     const tg = Telegram.WebApp;
@@ -135,15 +139,32 @@
     }
     loadText();
 
+    log2("test2");
+
+
+    function log(msg) {
+      const el = document.getElementById('log');
+      el.innerHTML += `<pre>${msg}</pre>`;
+    }
+    function log2(msg) {
+      const el = document.getElementById('log2');
+      el.innerHTML += `<pre>${msg}</pre>`;
+    }
+
     // Сохранение
     document.getElementById('saveBtn').onclick = () => {
       const content = quill.getText(); // plain text, без html
+      
 
       fetch(`https://n8n.srv1168226.hstgr.cloud/webhook/save-text`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ textId, text: content })
       });
+
+      log(content);
+      log("test1");
+
 
       tg.sendData(JSON.stringify({ textId }));
       tg.close();
