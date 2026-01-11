@@ -136,6 +136,7 @@
 
     const params = new URLSearchParams(window.location.search);
     const textId = params.get('textId');
+    const part = params.get('part');
 
     const loader = document.getElementById('loader');
     const showLoader = () => loader.style.display = 'flex';
@@ -158,7 +159,7 @@
     function loadText() {
       showLoader();
 
-      fetch(`https://garaga-n8n.ru/webhook/get-text?textId=${textId}`)
+      fetch(`https://garaga-n8n.ru/webhook/get-text?textId=${textId}&part=${part}`)
         .then(res => res.json())
         .then(data => {
           // Вставляем как pre (для JSON) или обычный текст
@@ -180,7 +181,7 @@
       fetch(`https://garaga-n8n.ru/webhook/save-text`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ textId, text: content })
+        body: JSON.stringify({ textId, text: content, part: part })
       })
       .then(res => {
         if (!res.ok) {
