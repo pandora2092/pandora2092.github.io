@@ -161,7 +161,11 @@
     }
     function log2(msg) {
       const el = document.getElementById('log2');
-      el.innerHTML += `<pre>${msg}</pre>`;
+      if (typeof msg === 'object') {
+        el.innerHTML += `<pre>${JSON.stringify(msg, null, 2)}</pre>`;
+      } else {
+        el.innerHTML += `<pre>${msg}</pre>`;
+      }
     }
 
     // Сохранение
