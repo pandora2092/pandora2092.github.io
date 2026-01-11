@@ -10,8 +10,6 @@
   <!-- Quill (бесплатно, MIT) -->
   <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
   <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
-  <script>eruda.init();</script>
 
   <style>
     body {
@@ -97,10 +95,6 @@
   <!-- Контейнер для Quill -->
   <div id="editor-container"></div>
   <button id="saveBtn">💾 Сохранить</button>
-  <div id="log" style="white-space:pre-wrap;font-size:12px"></div>
-
-  <div id="log2" style="white-space:pre-wrap;font-size:12px"></div>
-
 
   <script>
     const tg = Telegram.WebApp;
@@ -130,54 +124,20 @@
     // Загрузка текста
     function loadText() {
       fetch(`https://n8n.srv1168226.hstgr.cloud/webhook/get-text?textId=${textId || 'recW0W5t7N2CQefqL'}`)
-        // .then(res => {
-        //   res.json()
-        //   log2(res);
-        // })
-        .then(async res => {
-          const text = await res.text(); // читаем тело
-          // log2({
-          //   status: res.status,
-          //   ok: res.ok,
-          //   body: text
-          // })
-        })
+        .then(res => res.json())
         .then(data => {
           // Вставляем как pre (для JSON) или обычный текст
           quill.setText(data.text || '');
-          log2(data.text);
-          
         })
-        .catch((err ) => {
-          log2({
-            error: err.message,
-            stack: err.stack
-          });
+        .catch(() => {
           quill.setText('Ошибка загрузки текста');
         });
     }
     loadText();
 
- 
-
-
-    function log(msg) {
-      const el = document.getElementById('log');
-      el.innerHTML += `<pre>${msg}</pre>`;
-    }
-    function log2(msg) {
-      const el = document.getElementById('log2');
-      if (typeof msg === 'object') {
-        el.innerHTML += `<pre>${JSON.stringify(msg, null, 2)}</pre>`;
-      } else {
-        el.innerHTML += `<pre>${msg}</pre>`;
-      }
-    }
-
     // Сохранение
     document.getElementById('saveBtn').onclick = () => {
       const content = quill.getText(); // plain text, без html
-      
 
       fetch(`https://n8n.srv1168226.hstgr.cloud/webhook/save-text`, {
         method: 'POST',
@@ -185,12 +145,9 @@
         body: JSON.stringify({ textId, text: content })
       });
 
-      log(content);
-      log("test1");
-
-
       tg.sendData(JSON.stringify({ textId }));
       tg.close();
+
     };
   </script>
 
