@@ -132,6 +132,8 @@
         .then(data => {
           // Вставляем как pre (для JSON) или обычный текст
           quill.setText(data.text || '');
+          log2(data.text);
+          log(res);
         })
         .catch(() => {
           quill.setText('Ошибка загрузки текста');
@@ -139,7 +141,7 @@
     }
     loadText();
 
-    log2("test2");
+ 
 
 
     function log(msg) {
