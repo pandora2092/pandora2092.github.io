@@ -183,10 +183,23 @@
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ textId, text: content })
+      })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(`HTTPS ${res.status}`);
+        }
+        return res.text();
+      })
+      .then(() => {
+        alert('Текст сохранён ✅');
+        tg.sendData(JSON.stringify({ textId }));
+        tg.close();
+      })
+      .catch(err => {
+        console.error('SAVE ERROR:', err);
+        alert('Ошибка сохранения. Попробуйте ещё раз.');
       });
-
-      tg.sendData(JSON.stringify({ textId }));
-      //tg.close();
+ 
     };
   </script>
 
