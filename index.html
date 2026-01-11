@@ -134,11 +134,11 @@
         // })
         .then(async res => {
           const text = await res.text(); // читаем тело
-          log2({
-            status: res.status,
-            ok: res.ok,
-            body: text
-          })
+          // log2({
+          //   status: res.status,
+          //   ok: res.ok,
+          //   body: text
+          // })
         })
         .then(data => {
           // Вставляем как pre (для JSON) или обычный текст
@@ -147,6 +147,10 @@
           
         })
         .catch(() => {
+          log2({
+            error: err.message,
+            stack: err.stack
+          });
           quill.setText('Ошибка загрузки текста');
         });
     }
