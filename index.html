@@ -80,6 +80,30 @@
       color: #ffffff;
     }
 
+    /* ===== ЛОАДЕР ===== */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid rgba(255,255,255,0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
     /* Дополнительно увеличиваем текст на узких экранах */
     @media (max-width: 768px) {
       #editor-container {
@@ -93,6 +117,11 @@
   </style>
 </head>
 <body>
+
+   <!-- Лоадер -->
+  <div id="loader">
+    <div class="spinner"></div>
+  </div>
 
   <!-- Контейнер для Quill -->
   <div id="editor-container"></div>
@@ -110,6 +139,10 @@
     const params = new URLSearchParams(window.location.search);
     const textId = params.get('textId');
 
+    const loader = document.getElementById('loader');
+    const showLoader = () => loader.style.display = 'flex';
+    const hideLoader = () => loader.style.display = 'none';
+
     // Инициализация Quill
     const quill = new Quill('#editor-container', {
       theme: 'snow', // минимальная, адаптивная тема
@@ -125,6 +158,8 @@
 
     // Загрузка текста
     function loadText() {
+      showLoader();
+
       fetch(`https://garaga-n8n.ru/webhook/get-text?textId=${textId || 'recW0W5t7N2CQefqL'}`)
         .then(res => res.json())
         .then(data => {
@@ -133,6 +168,9 @@
         })
         .catch(() => {
           quill.setText('Ошибка загрузки текста');
+        })
+        .finally(() => {
+          hideLoader();
         });
     }
     loadText();
