@@ -125,7 +125,7 @@
 
     // Загрузка текста
     function loadText() {
-      fetch(`https://n8n.srv1168226.hstgr.cloud/webhook/get-text?textId=${textId || 'recW0W5t7N2CQefqL'}`)
+      fetch(`https://garaga-n8n.ru/webhook/get-text?textId=${textId || 'recW0W5t7N2CQefqL'}`)
         .then(res => res.json())
         .then(data => {
           // Вставляем как pre (для JSON) или обычный текст
