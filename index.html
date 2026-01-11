@@ -128,9 +128,17 @@
     // Загрузка текста
     function loadText() {
       fetch(`https://n8n.srv1168226.hstgr.cloud/webhook/get-text?textId=${textId || 'recW0W5t7N2CQefqL'}`)
-        .then(res => {
-          res.json()
-          log2(res);
+        // .then(res => {
+        //   res.json()
+        //   log2(res);
+        // })
+        .then(async res => {
+          const text = await res.text(); // читаем тело
+          log2({
+            status: res.status,
+            ok: res.ok,
+            body: text
+          })
         })
         .then(data => {
           // Вставляем как pre (для JSON) или обычный текст
