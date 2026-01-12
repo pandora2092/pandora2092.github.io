@@ -159,7 +159,7 @@
     function loadText() {
       showLoader();
 
-      fetch(`https://garaga-n8n.ru/webhook-test/get-text?textId=${textId}&part=${part}`)
+      fetch(`https://garaga-n8n.ru/webhook/get-text?textId=${textId}&part=${part}`)
         .then(res => res.json())
         .then(data => {
           // Вставляем как pre (для JSON) или обычный текст
