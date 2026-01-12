@@ -160,16 +160,12 @@
       showLoader();
 
       fetch(`https://garaga-n8n.ru/webhook-test/get-text?textId=${textId}&part=${part}`)
-        .then(res => {
-          console.log(res.json())
-        })
+        .then(res => res.json())
         .then(data => {
-          console.log(data, data.text)
           // Вставляем как pre (для JSON) или обычный текст
           quill.setText(data.text || '');
         })
-        .catch((err) => {
-          console.log(JSON.stringify(err, null, 2))
+        .catch(() => {
           quill.setText('Ошибка загрузки текста');
         })
         .finally(() => {
