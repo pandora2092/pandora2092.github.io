@@ -163,7 +163,8 @@
         .then(res => res.json())
         .then(data => {
           // Вставляем как pre (для JSON) или обычный текст
-          quill.setText(data.text || '');
+          const text = JSON.stringify(data.text, null, 2);
+          quill.setText(text || '');
         })
         .catch(() => {
           quill.setText('Ошибка загрузки текста');
